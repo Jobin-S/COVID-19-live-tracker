@@ -68,11 +68,16 @@ $(document).ready(function(){
                  
              })
              SelectedState =function(value){
+
+                if (window.stateBarChart != undefined){
+                    window.stateBarChart.destroy()
+                    console.log('done')
+                }
                  console.log(value)
                  newchart.destroy()                
                  
                  var chart = document.getElementById("chart").getContext('2d')
-                 var stateBarChart = new Chart(chart, {
+                  window.stateBarChart = new Chart(chart, {
                     type: 'bar',
                     data: {
                         labels:["Confirmed","Recovered","Deceased"],
@@ -86,7 +91,9 @@ $(document).ready(function(){
                     },
                     options: {}
                 });
+                
             }        
+            
 
 
         let dropdown = $('#dropdown-list');
