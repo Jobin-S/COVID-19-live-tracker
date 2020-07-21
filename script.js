@@ -35,7 +35,7 @@ $(document).ready(function(){
         $('#recover').append(total_recovered)
 
 
-        SelectedState =function(){
+        
 
             var chart = document.getElementById("chart").getContext('2d')
      
@@ -65,7 +65,28 @@ $(document).ready(function(){
                      ]
                  },
                  options:{}
-             })}        
+                 
+             })
+             SelectedState =function(value){
+                 console.log(value)
+                 newchart.destroy()                
+                 
+                 var chart = document.getElementById("chart").getContext('2d')
+                 var stateBarChart = new Chart(chart, {
+                    type: 'bar',
+                    data: {
+                        labels:["Confirmed","Recovered","Deceased"],
+                        datasets:[
+                            {label:state[value],
+                            data: [confirmed[value], recovered[value],deaths[value]],
+                            backgroundColor:['#3498db','#2ecc71','#e74c3c']
+                            }
+                        ]
+
+                    },
+                    options: {}
+                });
+            }        
 
 
         let dropdown = $('#dropdown-list');
@@ -90,7 +111,7 @@ $(document).ready(function(){
             stateCode.shift()
             var i;
             for (i = 0; i <= 36; i++) {
-                dropdown.append($('<option class="dropdown-item" onclick="SelectedState()"></option>').attr('value',stateCode[i]).text(state[i]));                
+                dropdown.append($('<option class="dropdown-item" id="options" onclick="SelectedState(value)"></option>').attr('value',i).text(state[i]));                
             }
             
 
